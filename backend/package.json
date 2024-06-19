@@ -1,0 +1,21 @@
+{
+  "name": "contest-app-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sainath",
+  "license": "ISC",
+  "dependencies": {
+    "@material-tailwind/react": "^2.1.9",
+    "axios": "^1.7.1",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.3.0",
+    "react-full-screen": "^1.1.1"
+  }
+}
