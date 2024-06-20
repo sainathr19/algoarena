@@ -100,15 +100,11 @@ router.post("/submit", async (req, res) => {
 
 router.post("/submissions", async (req, res) => {
   const { userId, problemId, contestId } = req.body;
-  let subs = [];
-  itr = Submissions.find({
+  let subs = await Submissions.find({
     userId: userId,
     problemId: problemId,
     contestId: contestId,
-  });
-  while (await itr.hasNext()) {
-    subs.push(await itr.next());
-  }
+  }).toArray();
   res.json(subs);
 });
 

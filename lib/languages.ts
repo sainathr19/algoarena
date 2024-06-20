@@ -25,7 +25,7 @@ const someJSCodeExample = `function processData(input) {
   
   const somePythonCodeExample = `# Enter your code here. Read input from STDIN. Print output to STDOUT`;
   
-  const files = {
+  const languages = {
     js: {
       lang: "javascript",
       path: "main.js",
@@ -46,5 +46,5 @@ const someJSCodeExample = `function processData(input) {
     },
   };
   
-  export default files;
+  export default languages;
   

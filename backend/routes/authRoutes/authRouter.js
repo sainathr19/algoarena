@@ -35,7 +35,7 @@ router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   const User = await Credentials.findOne({ userId: username });
   if (User) {
-    return res.json({ msg: "Username already Taken", status: "error" });
+    return res.json({ msg: "Username already Taken", status: "destructive" });
   } else {
     const hashedPassword = await bcrypt.hash(password, 10);
     Credentials.insertOne({
