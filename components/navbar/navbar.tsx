@@ -17,7 +17,7 @@ const Navbar = () => {
       <Link href="/" className="flex gap-2 items-center">
         <CodeXml className="h-[25px] w-[25px] sm:h-[30px] sm:w-[30px]" />
         <CardTitle className="text-xl md:text-2xl font-semibold tracking-wide">
-          Algoarena
+          AlgoArena
         </CardTitle>
       </Link>
       <section className="mr-5">

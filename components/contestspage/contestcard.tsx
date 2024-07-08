@@ -8,11 +8,25 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 import { Button } from "../ui/button";
-import { DotFilledIcon, LockClosedIcon } from "@radix-ui/react-icons";
-type ContestType = "ended" | "upcoming" | "ongoing";
+import { LockClosedIcon } from "@radix-ui/react-icons";
+import { Input } from "postcss";
+type contestStatus = "ended" | "upcoming" | "ongoing";
 interface ContestCardProps {
-  type: ContestType;
+  status: contestStatus;
+  isPrivate: boolean;
   info: {
     title: string;
     contestId: string;
@@ -22,18 +36,20 @@ interface ContestCardProps {
   };
 }
 const ContestCard = (props: ContestCardProps) => {
-  const Type = props.type;
+  const { isPrivate, status } = props;
   const [contestInfo, setContestInfo] = useState<ContestCardProps["info"]>(
     props.info
   );
   return (
     <Card className="w-full relative">
-      <section className="flex gap-4 items-center absolute right-5 top-7">
-        <iframe
-          className="h-3 w-3"
-          src="https://lottie.host/embed/9a659b60-798e-4a72-9aab-175626d31c86/v64qZfP6F9.json"
-        ></iframe>
-        <LockClosedIcon />
+      <section className="flex gap-4 items-center absolute right-7 top-7">
+        {status === "ongoing" && (
+          <iframe
+            className="h-3 w-3"
+            src="https://lottie.host/embed/9a659b60-798e-4a72-9aab-175626d31c86/v64qZfP6F9.json"
+          ></iframe>
+        )}
+        {isPrivate && <LockClosedIcon />}
       </section>
       <CardHeader className="flex flex-row justify-around">
         <CardTitle className="text-center">{contestInfo.title}</CardTitle>
@@ -48,13 +64,15 @@ const ContestCard = (props: ContestCardProps) => {
           <CardTitle className="text-lg">{contestInfo.duration} Mins</CardTitle>
         </div>
         <div className="flex flex-col items-center gap-3">
-          <CardDescription>Ends in </CardDescription>
+          <CardDescription>
+            {status === "ongoing" ? "Ends in" : "Starts in"}
+          </CardDescription>
           <CardTitle className="text-lg tracking-wider">00:15:56</CardTitle>
         </div>
       </CardContent>
       <CardFooter className="flex justify-center">
         <Button className="w-full">
-          {Type === "ongoing" ? "Participate" : "Preview"}
+          {status === "ongoing" ? "Enter" : "Preview"}
         </Button>
       </CardFooter>
     </Card>
