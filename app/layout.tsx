@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/context/authContext";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,15 +22,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="">
-        <TooltipProvider>
-          <ScrollArea>
-            <Toaster />
-            <AuthProvider>
-              <Navbar />
-              <div className="h-[cal(100vh-64px)]">{children}</div>
-            </AuthProvider>
-          </ScrollArea>
-        </TooltipProvider>
+        <Suspense fallback={<div>Loading..</div>}>
+          <TooltipProvider>
+            <ScrollArea>
+              <Toaster />
+              <AuthProvider>
+                <Navbar />
+                <div className="h-[cal(100vh-64px)]">{children}</div>
+              </AuthProvider>
+            </ScrollArea>
+          </TooltipProvider>
+        </Suspense>
       </body>
     </html>
   );
