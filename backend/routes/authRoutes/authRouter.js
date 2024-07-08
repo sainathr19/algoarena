@@ -20,13 +20,13 @@ router.post("/signin", async (req, res) => {
   }
 });
 
-router.get("/is-authenticated", (req, res) => {
+router.get("/verifyuser", (req, res) => {
   const token = req.query.token;
   jwt.verify(token, "secret", function (err, decoded) {
     if (!err) {
-      res.send(decoded);
+      return res.send(true);
     } else {
-      res.send(err.name);
+      return res.send(false);
     }
   });
 });
@@ -35,7 +35,7 @@ router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   const User = await Credentials.findOne({ userId: username });
   if (User) {
-    return res.json({ msg: "Username already Taken", status: "destructive" });
+    return res.json({ status: "USERNAME_TAKEN", statusCode: 3 });
   } else {
     const hashedPassword = await bcrypt.hash(password, 10);
     Credentials.insertOne({
@@ -43,7 +43,7 @@ router.post("/signup", async (req, res) => {
       password: hashedPassword,
     });
   }
-  return res.json({ msg: "Registration Success", status: "success" });
+  return res.json({ msg: "SUCCESS", statusCode: 0 });
 });
 
 module.exports = router;

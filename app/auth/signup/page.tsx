@@ -40,17 +40,25 @@ export default function LoginForm() {
       },
     };
     axios.request(SigupConfig).then((res) => {
-      toast({
-        description: res.data.msg,
-        variant: res.data.status,
-      });
+      const statusCode = res.data.statusCode;
+      if (statusCode === 0) {
+        toast({
+          description: "Account created",
+          variant: "success",
+        });
+      } else if (statusCode === 3) {
+        toast({
+          description: "Username already Taken",
+          variant: "destructive",
+        });
+      }
     });
   };
   return (
-    <Card className="mx-auto px-6">
+    <Card className="sm:px-6 w-full sm:max-w-[450px] mt-10 mx-4">
       <CardHeader>
-        <CardTitle className="text-xl">Sign Up</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-xl text-center">Sign Up</CardTitle>
+        <CardDescription className="text-center">
           Enter your information to create an account
         </CardDescription>
       </CardHeader>
@@ -63,7 +71,7 @@ export default function LoginForm() {
               placeholder="test123"
               required
               onChange={(e) => {
-                setFormData({ ...Formdata, password: e.target.value });
+                setFormData({ ...Formdata, username: e.target.value });
               }}
             />
           </div>
@@ -92,7 +100,7 @@ export default function LoginForm() {
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">
-          Already have an account?
+          Already have an account?&nbsp;
           <Link href="/auth/signin" className="underline">
             Sign in
           </Link>

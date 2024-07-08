@@ -1,18 +1,27 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import React, { useEffect, useState } from "react";
 import StatementCell from "./statement-cell";
 import axios from "axios";
 import ContestInfo from "./info";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ChevronLeftIcon } from "@radix-ui/react-icons";
+
+type contestProblem = "opened" | "notopened" | "solved";
 interface contestProgressType {
   contestId: string;
   score: number;
   solved: number;
   userId: string;
-  problems: {
-    problemId: string;
-  };
+  problems: contestProblem[];
 }
 const ContestHomePage = () => {
   const [contestProblems, setContestProblems] = useState<Array<any>>([]);
@@ -27,6 +36,7 @@ const ContestHomePage = () => {
     };
     axios.request(Config).then((res) => {
       setContestProblems(res.data);
+      console.log(res.data);
     });
     const progressRequestConfig = {
       method: "POST",
@@ -44,7 +54,7 @@ const ContestHomePage = () => {
   return (
     <Card className="h-full">
       <CardHeader>
-        <CardTitle className="text-center text-[2rem]">
+        <CardTitle className="text-center text-[1.5rem]">
           Weeekly Contest - 1
         </CardTitle>
       </CardHeader>
@@ -56,12 +66,16 @@ const ContestHomePage = () => {
                 <StatementCell
                   key={index}
                   statement={problem}
-                  status="notopened"
+                  status={
+                    contestProgress
+                      ? contestProgress.problems[problem.problemId]
+                      : "notopened"
+                  }
                 />
               );
             })}
         </section>
-        <ContestInfo progress={contestProgress} />
+        {contestProgress && <ContestInfo progress={contestProgress} />}
       </CardContent>
     </Card>
   );

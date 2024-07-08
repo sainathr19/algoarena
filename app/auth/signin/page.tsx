@@ -15,12 +15,18 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useAuth } from "@/context/authContext";
 export default function LoginForm() {
   const [Formdata, setFormData] = useState({
     username: "",
     password: "",
   });
   const { toast } = useToast();
+  const router = useRouter();
+  const params = useSearchParams();
+  const redirecturl = decodeURIComponent(params.get("redirect") || "/");
+  const { setLoggedin } = useAuth();
   const handleSignIn = async () => {
     if (Formdata.username === "" || Formdata.password === "") {
       toast({
@@ -49,6 +55,12 @@ export default function LoginForm() {
           description: "Login Successful",
           variant: "success",
         });
+        document.cookie = `authToken=${res.data.token}; path=/;`;
+        setLoggedin(true);
+        console.log("Redirecting : " + redirecturl);
+        setTimeout(() => {
+          router.push(redirecturl);
+        }, 1000);
       } else if (res.data.result === "ude") {
         toast({
           description: "User not Found ",
@@ -63,7 +75,7 @@ export default function LoginForm() {
     });
   };
   return (
-    <Card className="mx-auto px-6">
+    <Card className="sm:px-6 w-full mx-4 sm:w-[450px] mt-10">
       <CardHeader>
         <CardTitle className="text-2xl text-center">Login</CardTitle>
         <CardDescription className="text-center">

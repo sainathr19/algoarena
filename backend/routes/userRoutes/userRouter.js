@@ -6,6 +6,7 @@ const {
   TestCases,
   Submissions,
   UserProgress,
+  ContestsInfo,
 } = require("../../db/collections");
 const postSubmission = require("../../Judge0/submit");
 const getOutput = require("../../Judge0/output");
@@ -40,7 +41,8 @@ router.post("/run", async (req, res) => {
 });
 
 router.post("/submit", async (req, res) => {
-  const { userId, contestId, problemId, LanguageId, sourceCode } = req.body;
+  const { userId, contestId, problemId, LanguageId, LanguageName, sourceCode } =
+    req.body;
   let userScore = 0;
   let maxScore = 0;
   const Problem = await TestCases.findOne({
@@ -68,10 +70,10 @@ router.post("/submit", async (req, res) => {
         userScore += testcase.score;
       }
       maxScore += testcase.score;
-      Results.push(output);
+      Results.push(output.status_id);
     }
     const isAccepted = Results.every((result) => {
-      return result.status_id == 3;
+      return result === 3;
     });
     if (isAccepted) {
       UpdateUserProgress(userId, contestId, problemId, "solved", userScore);
@@ -84,7 +86,7 @@ router.post("/submit", async (req, res) => {
       problemId,
       getCurrentTime(),
       sourceCode,
-      "python",
+      LanguageName,
       isAccepted ? "Accepted" : "Not Accepted",
       Results,
       userScore
@@ -94,6 +96,7 @@ router.post("/submit", async (req, res) => {
       results: Results,
       userScore: userScore,
       maxScore: maxScore,
+      status: isAccepted ? "Accepted" : "Not Accepted",
     });
   }
 });
@@ -165,5 +168,14 @@ router.post("/getleaderboard", async (req, res) => {
     Leaderboard.push(await progress.next());
   }
   return res.json(Leaderboard);
+});
+
+router.get("/contests", async (req, res) => {
+  const contestsList = await ContestsInfo.find({}).toArray();
+  return res.json(contestsList);
+});
+router.post("/add", async (req, res) => {
+  ContestsInfo.insertOne(req.body);
+  res.json("DONE");
 });
 module.exports = router;

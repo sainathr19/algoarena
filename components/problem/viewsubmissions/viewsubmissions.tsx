@@ -11,51 +11,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-];
+import { Card, CardContent, CardDescription } from "@/components/ui/card";
+import Link from "next/link";
 const ViewSubmissions = () => {
   const [Submissions, setSubmissions] = useState([]);
   const params = useParams();
@@ -76,11 +33,13 @@ const ViewSubmissions = () => {
     });
   }, []);
   return (
-    <Card className="border-none outline-none shadow-none pb-5">
+    <Card className="border-none outline-none shadow-none pb-5 h-full">
       <CardContent>
         <Table>
           <TableCaption>
-            A list of submissions made by you to this problem.
+            {Submissions.length === 0
+              ? "No submissions to show"
+              : "A list of submissions made by you to this problem."}
           </TableCaption>
           <TableHeader>
             <TableRow>
@@ -99,7 +58,14 @@ const ViewSubmissions = () => {
                   <TableCell className="text-center">{Language}</TableCell>
                   <TableCell className="text-center">{verdict}</TableCell>
                   <TableCell className="text-center">{score}</TableCell>
-                  <TableCell className="text-center">{index}</TableCell>
+                  <TableCell className="text-center">
+                    <Link
+                      href="/"
+                      className="border border-1 rounded-lg p-3 px-4"
+                    >
+                      View
+                    </Link>
+                  </TableCell>
                 </TableRow>
               )
             )}

@@ -1,4 +1,4 @@
-const { authDB, progressDB, problemDB } = require("./databases");
+const { authDB, progressDB, problemDB, contestsDB } = require("./databases");
 
 const TestCases = problemDB.collection("testcases");
 const Submissions = problemDB.collection("submissions");
@@ -9,6 +9,8 @@ const UserProgress = progressDB.collection("userprogress");
 
 const Credentials = authDB.collection("credentials");
 
+const ContestsInfo = contestsDB.collection("info");
+
 module.exports = {
   TestCases,
   Submissions,
@@ -16,4 +18,5 @@ module.exports = {
   Precodes,
   UserProgress,
   Credentials,
+  ContestsInfo,
 };
