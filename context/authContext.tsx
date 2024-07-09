@@ -1,5 +1,6 @@
 "use client";
 
+import base_url from "@/lib/url";
 import axios from "axios";
 import {
   createContext,
@@ -27,7 +28,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   useEffect(() => {
     const requestConfig = {
       method: "GET",
-      url: "http://localhost:5000/auth/verifyuser",
+      url: base_url + "/auth/verifyuser",
       params: {
         token: localStorage.getItem("token"),
       },

@@ -1,10 +1,11 @@
 import axios from "axios"
+import base_url from "./url";
 
 const VerifyUser = async  (token : string | undefined) : Promise<boolean> =>{
     if(!token) return false;
     const requestConfig = {
         method: "GET",
-        url: "http://localhost:5000/auth/verifyuser",
+        url: base_url+"/auth/verifyuser",
         params: {
           token: token,
         },

@@ -13,13 +13,14 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import Link from "next/link";
+import base_url from "@/lib/url";
 const ViewSubmissions = () => {
   const [Submissions, setSubmissions] = useState([]);
   const params = useParams();
   useEffect(() => {
     const options = {
       method: "POST",
-      url: "http://localhost:5000/user/submissions",
+      url: base_url + "/user/submissions",
       data: {
         userId: localStorage.getItem("username"),
         problemId: params.problemId,

@@ -45,6 +45,7 @@ import {
   ChevronUpIcon,
 } from "@radix-ui/react-icons";
 import Link from "next/link";
+import base_url from "@/lib/url";
 interface LanguageType {
   lang: string;
   path: string;
@@ -82,7 +83,7 @@ const Problem = () => {
     console.log(params.problemId);
     const Config = {
       method: "POST",
-      url: "http://localhost:5000/user/problem",
+      url: base_url + "/user/problem",
       data: {
         userId: localStorage.getItem("username"),
         contestId: "1001",
@@ -97,7 +98,7 @@ const Problem = () => {
     setLoading(true);
     const config = {
       method: "POST",
-      url: "http://localhost:5000/user/run",
+      url: base_url + "/user/run",
       data: {
         userId: localStorage.getItem("username"),
         contestId: "1001",
@@ -120,7 +121,7 @@ const Problem = () => {
     setLoading(true);
     const config = {
       method: "POST",
-      url: "http://localhost:5000/user/submit",
+      url: base_url + "/user/submit",
       data: {
         userId: localStorage.getItem("username"),
         contestId: "1001",

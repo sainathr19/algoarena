@@ -19,6 +19,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import axios from "axios";
+import base_url from "@/lib/url";
 const LeaderBoard = () => {
   interface LeaderBoardCell {
     userId: String;
@@ -29,7 +30,7 @@ const LeaderBoard = () => {
   useEffect(() => {
     const LeaderboardRequestConfig = {
       method: "POST",
-      url: "http://localhost:5000/user/getleaderboard",
+      url: base_url + "/user/getleaderboard",
       data: {
         contestId: "1001",
       },

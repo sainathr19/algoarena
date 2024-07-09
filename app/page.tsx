@@ -12,7 +12,6 @@ import {
 import HostFeatures from "@/lib/host_features";
 import IdeFeatures from "@/lib/ide_features";
 import Link from "next/link";
-import ContestsTab from "./contests/tabs";
 
 export default function Home() {
   return (
@@ -76,6 +75,8 @@ export default function Home() {
               problems: 3,
               time: Date.now(),
               contestId: "1003",
+              startTime: "",
+              endTime: "",
             }}
           />
           <ContestCard
@@ -87,6 +88,8 @@ export default function Home() {
               problems: 3,
               time: Date.now(),
               contestId: "1003",
+              startTime: "",
+              endTime: "",
             }}
           />
           <ContestCard
@@ -98,6 +101,8 @@ export default function Home() {
               problems: 3,
               time: Date.now(),
               contestId: "1003",
+              startTime: "",
+              endTime: "",
             }}
           />
         </CardContent>

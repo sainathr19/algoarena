@@ -14,6 +14,7 @@ import ContestInfo from "./info";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
+import base_url from "@/lib/url";
 
 type contestProblem = "opened" | "notopened" | "solved";
 interface contestProgressType {
@@ -29,7 +30,7 @@ const ContestHomePage = () => {
   useEffect(() => {
     const Config = {
       method: "POST",
-      url: "http://localhost:5000/user/get-problems",
+      url: base_url + "/user/get-problems",
       data: {
         contestId: "1001",
       },
@@ -40,7 +41,7 @@ const ContestHomePage = () => {
     });
     const progressRequestConfig = {
       method: "POST",
-      url: "http://localhost:5000/user/getcontestprogress",
+      url: base_url + "/user/getcontestprogress",
       data: {
         userId: localStorage.getItem("username"),
         contestId: "1001",

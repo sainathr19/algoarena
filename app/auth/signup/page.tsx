@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 import axios from "axios";
+import base_url from "@/lib/url";
 
 export default function LoginForm() {
   const { toast } = useToast();
@@ -33,7 +34,7 @@ export default function LoginForm() {
     }
     const SigupConfig = {
       method: "POST",
-      url: "http://localhost:5000/auth/signup",
+      url: base_url + "/auth/signup",
       data: {
         username: Formdata.username,
         password: Formdata.password,

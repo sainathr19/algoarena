@@ -17,6 +17,7 @@ import axios from "axios";
 
 import React, { useEffect, useState } from "react";
 import ContestsTab from "./tabs";
+import base_url from "@/lib/url";
 
 const dummyContests = [
   {
@@ -76,7 +77,7 @@ const ContestsPage = () => {
   useEffect(() => {
     const config = {
       method: "GET",
-      url: "http://localhost:5000/user/contests",
+      url: base_url + "/user/contests",
     };
     axios.request(config).then((res) => {
       setContests(res.data);
