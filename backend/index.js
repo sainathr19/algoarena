@@ -6,6 +6,11 @@ const hostRouter = require("./routes/hostRoutes/hostRouter");
 const userRouter = require("./routes/userRoutes/userRouter");
 app.use(express.json());
 app.use(cors());
+app.use(
+  cors({
+    origin: "https://www.algoarena.cloud/",
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Welcome to Codenest API");
