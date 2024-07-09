@@ -12,6 +12,7 @@ import {
 import HostFeatures from "@/lib/host_features";
 import IdeFeatures from "@/lib/ide_features";
 import Link from "next/link";
+import ContestsTab from "./contests/tabs";
 
 export default function Home() {
   return (
@@ -27,6 +28,12 @@ export default function Home() {
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex gap-5 sm:justify-center">
+          <Link
+            href="/contest/1001"
+            className="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+          >
+            Demo Contest
+          </Link>
           <Link
             href="/contests"
             className="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"

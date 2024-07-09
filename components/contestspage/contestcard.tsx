@@ -8,22 +8,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 
 import { Button } from "../ui/button";
 import { LockClosedIcon } from "@radix-ui/react-icons";
-import { Input } from "postcss";
-type contestStatus = "ended" | "upcoming" | "ongoing";
+import Timer from "../timer/timer";
+type contestStatus = "completed" | "upcoming" | "ongoing";
 interface ContestCardProps {
   status: contestStatus;
   isPrivate: boolean;
@@ -33,6 +22,8 @@ interface ContestCardProps {
     duration: number;
     problems: number;
     time: number;
+    startTime: string;
+    endTime: string;
   };
 }
 const ContestCard = (props: ContestCardProps) => {
@@ -67,7 +58,12 @@ const ContestCard = (props: ContestCardProps) => {
           <CardDescription>
             {status === "ongoing" ? "Ends in" : "Starts in"}
           </CardDescription>
-          <CardTitle className="text-lg tracking-wider">00:15:56</CardTitle>
+          <CardTitle className="text-lg tracking-wider">
+            <Timer
+              startTime={contestInfo.startTime}
+              endTime={contestInfo.endTime}
+            />
+          </CardTitle>
         </div>
       </CardContent>
       <CardFooter className="flex justify-center">

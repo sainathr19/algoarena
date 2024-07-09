@@ -41,15 +41,21 @@ import {
 } from "@/components/ui/popover";
 import {
   CalendarIcon,
+  CounterClockwiseClockIcon,
   EyeOpenIcon,
   Pencil2Icon,
   TrashIcon,
 } from "@radix-ui/react-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { TimePicker } from "@/components/timepicker/timepicker";
 export default function Dashboard() {
   const [date, setDate] = useState<Date>();
+  const [time, setTime] = useState<Date>();
+  useEffect(() => {
+    console.log(date);
+  }, [date]);
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40 ">
       <div className="flex flex-col sm:gap-4 sm:py-4">
@@ -233,12 +239,34 @@ export default function Dashboard() {
                               selected={date}
                               onSelect={setDate}
                               initialFocus
+                              fromDate={new Date()}
                             />
                           </PopoverContent>
                         </Popover>
                       </div>
                       <div className="grid gap-3">
                         <Label htmlFor="subcategory">Time</Label>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "w-max justify-start text-left font-normal",
+                                !date && "text-muted-foreground"
+                              )}
+                            >
+                              <CounterClockwiseClockIcon className="mr-2 h-4 w-4" />
+                              {date ? (
+                                format(date, "PPP")
+                              ) : (
+                                <span>Choose time</span>
+                              )}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0">
+                            <TimePicker date={time} setDate={setTime} />
+                          </PopoverContent>
+                        </Popover>
                       </div>
                     </div>
                   </CardContent>

@@ -53,6 +53,17 @@ h6 {
 }
 
 @layer base {
+  /* Remove spinner from WebKit browsers (Chrome, Safari) */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    @apply appearance-none;
+    margin: 0;
+  }
+
+  /* Remove spinner from Firefox */
+  input[type="number"] {
+    @apply appearance-none;
+  }
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
