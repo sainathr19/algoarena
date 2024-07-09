@@ -17,6 +17,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/authContext";
+import base_url from "@/lib/url";
 export default function LoginForm() {
   const [Formdata, setFormData] = useState({
     username: "",
@@ -37,7 +38,7 @@ export default function LoginForm() {
     }
     const options = {
       method: "POST",
-      url: "http://localhost:5000/auth/signin",
+      url: base_url + "/auth/signin",
       params: {},
       headers: {
         "content-type": "application/json",
